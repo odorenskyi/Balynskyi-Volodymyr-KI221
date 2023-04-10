@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+#include "ModulesBalynskyi.h" 
+
+void printDeveloperInfo() {
+    std::cout << "Розробник: Балинський Володимир © Всі права захищені\n";
+}
+
+bool calculateBooleanExpression(char a, char b) {
+    return (a + 1) > std::abs(b - 2);
+}
+
+void printNumberValues(float x, float y, float z) {
+    std::cout << "Значення x у десятковій системі числення: " << x << std::endl;
+    std::cout << "Значення y у десятковій системі числення: " << y << std::endl;
+    std::cout << "Значення z у десятковій системі числення: " << z << std::endl;
+    
+    std::cout << "Значення x у шістнадцятковій системі числення: " << std::hex << x << std::endl;
+    std::cout << "Значення y у шістнадцятковій системі числення: " << std::hex << y << std::endl;
+    std::cout << "Значення z у шістнадцятковій системі числення: " << std::hex << z << std::endl;
+}
+
+int s_calculation() {
+  cout<<s_calculation(x,y,z)<<endl;
+    getCmd();
+
+    return 0;
+}
