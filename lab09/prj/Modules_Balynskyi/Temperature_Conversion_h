@@ -1,1 +1,14 @@
 
+#ifndef TEMPERATURE_CONVERSION_H
+#define TEMPERATURE_CONVERSION_H
+
+namespace TemperatureConversion {
+    double fahrenheitToCelsius(double fahrenheit) {
+        double celsius = (5.0 / 9.0) * (fahrenheit - 32);
+        return celsius;
+    }
+}
+
+
+#endif
+
