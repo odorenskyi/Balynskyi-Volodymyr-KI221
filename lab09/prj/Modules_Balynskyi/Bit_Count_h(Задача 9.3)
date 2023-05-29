@@ -1,1 +1,25 @@
+#ifndef BIT_COUNT_H
+#define BIT_COUNT_H
+
+namespace BitCount {
+    int calculateResult(unsigned int n) {
+        int count = 0;
+        if (n & 0x0001) {
+            while (n != 0) {
+                if (n & 0x0001) {
+                    count++;
+                }
+                n >>= 1;
+            }
+        } else {
+            while (n != 0) {
+                count += n & 0x0001;
+                n >>= 1;
+            }
+        }
+        return count;
+    }
+}
+
+#endif
 
