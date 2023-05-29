@@ -1,30 +1,10 @@
 #include <iostream>
 #include <cstdlib>
 #include <cctype>
-
-// Функція для обробки введеного символу "j"
-void s_calculation() {
-    std::cout << "Виконується функція s_calculation()" << std::endl;
-    // Додайте код для обчислення s_calculation() тут
-}
-
-// Функція для обробки введеного символу "z"
-void z_function() {
-    std::cout << "Виконується функція z_function()" << std::endl;
-    // Додайте код для виконання функції задачі 9.1 тут
-}
-
-// Функція для обробки введеного символу "x"
-void x_function() {
-    std::cout << "Виконується функція x_function()" << std::endl;
-    // Додайте код для виконання функції задачі 9.2 тут
-}
-
-// Функція для обробки введеного символу "c"
-void c_function() {
-    std::cout << "Виконується функція c_function()" << std::endl;
-    // Додайте код для виконання функції задачі 9.3 тут
-}
+#include <SEA_STATE_H.h>
+#include <TEMPERATURE_CONVERSION_H.h>
+#include <BIT_COUNT_H.h>
+#include <MODULESBALYNSKYI_H.h>
 
 int main() {
     char input;
@@ -36,11 +16,11 @@ int main() {
         if (input == 'j') {
             s_calculation();
         } else if (input == 'z') {
-            z_function();
+           calculateSeaState();
         } else if (input == 'x') {
-            x_function();
+            fahrenheitToCelsius();
         } else if (input == 'c') {
-            c_function();
+            calculateResult();
         } else if (input == 'v' || input == 'a') {
             std::cout << "Вихід з програми." << std::endl;
             break;
