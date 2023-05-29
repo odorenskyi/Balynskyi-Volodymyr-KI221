@@ -1,1 +1,31 @@
 
+// Файл sea_state.h
+
+#ifndef SEA_STATE_H
+#define SEA_STATE_H
+
+int calculateSeaState(double waveHeight) {
+    if (waveHeight < 0.1) {
+        return 0; // Бал 0
+    } else if (waveHeight < 0.5) {
+        return 1; // Бал 1
+    } else if (waveHeight < 1.25) {
+        return 2; // Бал 2
+    } else if (waveHeight < 2.5) {
+        return 3; // Бал 3
+    } else if (waveHeight < 4.0) {
+        return 4; // Бал 4
+    } else if (waveHeight < 6.0) {
+        return 5; // Бал 5
+    } else if (waveHeight < 9.0) {
+        return 6; // Бал 6
+    } else if (waveHeight < 14.0) {
+        return 7; // Бал 7
+    } else {
+        return 8; // Бал 8
+    }
+}
+
+#endif
+
+
