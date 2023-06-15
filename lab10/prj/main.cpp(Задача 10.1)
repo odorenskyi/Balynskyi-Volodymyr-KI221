@@ -1,1 +1,74 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm>
 
+// Функція, яка підраховує кількість знаків ":"
+int countColons(const std::string& sentence) {
+    int count = 0;
+    for (char c : sentence) {
+        if (c == ':') {
+            count++;
+        }
+    }
+    return count;
+}
+
+// Функція, яка перевіряє, чи є символ голосною літерою
+bool isVowel(char c) {
+    c = std::tolower(c); // Переводимо символ до нижнього регістру для порівняння
+    return (c == 'а' || c == 'е' || c == 'є' || c == 'и' || c == 'і' || c == 'ї' || c == 'о' || c == 'у' || c == 'ю' || c == 'я');
+}
+
+// Функція, яка видаляє голосні літери з речення
+std::string removeVowels(const std::string& sentence) {
+    std::string result;
+    for (char c : sentence) {
+        if (!isVowel(c)) {
+            result += c;
+        }
+    }
+    return result;
+}
+
+int main() {
+    std::string authorInfo;
+    std::cout << "Введіть авторську інформацію: ";
+    std::getline(std::cin, authorInfo);
+
+    std::ifstream inputFile("input.txt"); // Назва вашого вхідного файлу
+
+    if (!inputFile) {
+        std::cout << "Помилка відкриття файлу!" << std::endl;
+        return 1;
+    }
+
+    std::string sentence;
+    std::getline(inputFile, sentence);
+
+    std::cout << "Вхідне речення: " << sentence << std::endl;
+
+    int colonCount = countColons(sentence);
+    std::cout << "Кількість знаків \":\" у реченні: " << colonCount << std::endl;
+
+    std::string sentenceWithoutVowels = removeVowels(sentence);
+    std::cout << "Речення без голосних літер: " << sentenceWithoutVowels << std::endl;
+
+    inputFile.close();
+
+    // Запис результатів у файл "output.txt"
+    std::ofstream outputFile("output.txt"); // Назва вашого вихідного файлу
+
+    if (outputFile) {
+        outputFile << "Вхідне речення: " << sentence << std::endl;
+        outputFile << "Кількість знаків \":\" у реченні: " << colonCount << std::endl;
+        outputFile << "Речення без голосних літер: " << sentenceWithoutVowels << std::endl;
+
+        outputFile.close();
+        std::cout << "Результати були записані у файл \"вихідний.txt\"." << std::endl;
+    } else {
+        std::cout << "Помилка відкриття файлу для запису результатів!" << std::endl;
+    }
+
+    return 0;
+}
