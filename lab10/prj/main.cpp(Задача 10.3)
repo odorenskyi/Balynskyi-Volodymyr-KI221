@@ -30,7 +30,7 @@ int main() {
     }
 
     // Викликайте функцію s_calculation та отримайте результат
-    double s_result = s_calculation(x, y, z);
+    float s_result = s_calculation(x, y, z);
 
     // Запишіть результат у вихідний файл
     outputFile << "Результати виконання функції s_calculation з аргументами x = " << x
