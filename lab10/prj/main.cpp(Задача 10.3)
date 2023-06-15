@@ -1,1 +1,49 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <bitset>
+#include "ModulesПрізвище.h"
 
+int main() {
+    double x, y, z;
+    unsigned int b;
+
+    // Зчитайте значення x, y, z з консолі
+    std::cout << "Введіть значення x: ";
+    std::cin >> x;
+
+    std::cout << "Введіть значення y: ";
+    std::cin >> y;
+
+    std::cout << "Введіть значення z: ";
+    std::cin >> z;
+
+    // Зчитайте значення b з консолі
+    std::cout << "Введіть натуральне число b: ";
+    std::cin >> b;
+
+    // Відкрийте вихідний файл для допису
+    std::ofstream outputFile("output.txt", std::ios::app);
+    if (!outputFile) {
+        std::cerr << "Помилка відкриття вихідного файлу." << std::endl;
+        return 1;
+    }
+
+    // Викликайте функцію s_calculation та отримайте результат
+    double s_result = s_calculation(x, y, z);
+
+    // Запишіть результат у вихідний файл
+    outputFile << "Результати виконання функції s_calculation з аргументами x = " << x
+               << ", y = " << y << ", z = " << z << ": " << s_result << std::endl;
+
+    // Перетворіть число b у двійковий код та запишіть у вихідний файл
+    std::string binaryCode = std::bitset<32>(b).to_string();
+    outputFile << "Число b у двійковому коді: " << binaryCode << std::endl;
+
+    // Закрийте вихідний файл
+    outputFile.close();
+
+    std::cout << "Дані було додано до вихідного файлу." << std::endl;
+
+    return 0;
+}
