@@ -1,1 +1,63 @@
+#include <iostream>
+#include <fstream>
+#include <ctime>
+#include <map>
 
+std::map<char, std::string> transliterationMap = {
+    {'а', "a"}, {'б', "b"}, {'в', "v"}, {'г', "h"}, {'ґ', "g"}, {'д', "d"}, {'е', "e"}, {'є', "ie"}, {'ж', "zh"}, {'з', "z"}, {'и', "y"}, {'і', "i"},
+    {'ї', "i"}, {'й', "i"}, {'к', "k"}, {'л', "l"}, {'м', "m"}, {'н', "n"}, {'о', "o"}, {'п', "p"}, {'р', "r"}, {'с', "s"}, {'т', "t"}, {'у', "u"},
+    {'ф', "f"}, {'х', "kh"}, {'ц', "ts"}, {'ч', "ch"}, {'ш', "sh"}, {'щ', "shch"}, {'ь', ""}, {'\'', ""}, {'ю', "iu"}, {'я', "ia"},
+    {'А', "A"}, {'Б', "B"}, {'В', "V"}, {'Г', "H"}, {'Ґ', "G"}, {'Д', "D"}, {'Е', "E"}, {'Є', "IE"}, {'Ж', "ZH"}, {'З', "Z"}, {'И', "Y"}, {'І', "I"},
+    {'Ї', "I"}, {'Й', "I"}, {'К', "K"}, {'Л', "L"}, {'М', "M"}, {'Н', "N"}, {'О', "O"}, {'П', "P"}, {'Р', "R"}, {'С', "S"}, {'Т', "T"}, {'У', "U"},
+    {'Ф', "F"}, {'Х', "KH"}, {'Ц', "TS"}, {'Ч', "CH"}, {'Ш', "SH"}, {'Щ', "SHCH"}, {'Ь', ""}, {'\'', ""}, {'Ю', "IU"}, {'Я', "IA"}
+};
+
+std::string transliterateUkrainianText(const std::string& ukrainianText) {
+    std::string transliteratedText;
+    for (char ch : ukrainianText) {
+        if (transliterationMap.count(ch) > 0) {
+            transliteratedText += transliterationMap[ch];
+        } else {
+            transliteratedText += ch;
+        }
+    }
+    return transliteratedText;
+}
+
+int main() {
+    std::string inputFilePath = "input.txt";
+
+    std::ofstream inputFile(inputFilePath, std::ios::app);
+    if (!inputFile) {
+        std::cerr << "Помилка відкриття вхідного файлу." << std::endl;
+        return 1;
+    }
+
+    // Отримання поточної дати та часу
+    std::time_t currentTime = std::time(nullptr);
+    std::tm* localTime = std::localtime(&currentTime);
+
+    // Форматування дати у формат "ДД/ММ/РР"
+    char dateBuffer[11]; // Розмір 11 для збереження "ДД/ММ/РР\0"
+    std::strftime(dateBuffer, sizeof(dateBuffer), "%d/%m/%y", localTime);
+
+    inputFile << "Дату дозапису інформації: " << dateBuffer << std::endl;
+
+    std::string inputText((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
+    inputFile.close();
+
+    std::string transliteratedText = transliterateUkrainianText(inputText);
+
+    std::ofstream outputFile(inputFilePath, std::ios::app);
+    if (!outputFile) {
+        std::cerr << "Помилка відкриття вхідного файлу." << std::endl;
+        return 1;
+    }
+
+    outputFile << transliteratedText;
+    outputFile.close();
+
+    std::cout << "Текст було транслітеровано та додано до вхідного файлу разом з датою." << std::endl;
+
+    return 0;
+}
